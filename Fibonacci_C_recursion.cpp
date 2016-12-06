@@ -1,3 +1,6 @@
+/*
+ 15级楼梯，一步最多三级，爬上楼梯可以有多少种走法实现
+*/
 #include<iostream>
 using namespace std;
  
