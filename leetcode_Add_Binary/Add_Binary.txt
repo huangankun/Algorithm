@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string addBinary(string a, string b) 
+    {
+        string res;
+        const size_t n=a.size()>b.size()?a.size():b.size(); //获取最长的字符串长度
+        reverse(a.begin(),a.end());
+        reverse(b.begin(),b.end());             //反转便于运算
+        int car=0;
+        for(size_t i=0;i<n;i++){                //低位处理
+            const int ai=i<a.size()?a[i]-'0':0;
+            const int bi=i<b.size()?b[i]-'0':0;
+            const int val = (ai + bi + car)%2;
+            car = (ai + bi +car) / 2;
+            res.insert(res.begin(),val+'0');    //每一位都符合逻辑处理
+        }
+        if(car ==1)//最高位的维护
+            res.insert(res.begin(),'1');
+        return res;
+    }
+};
