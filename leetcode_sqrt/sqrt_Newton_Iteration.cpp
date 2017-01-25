@@ -1,6 +1,6 @@
-double abs_math(double num)
+﻿double abs_math(double num)
 {
-    return num<0?-num:num;      //取绝对值
+    return num<0?-num:num;      	//取绝对值
 }
 class Solution{
     public:
