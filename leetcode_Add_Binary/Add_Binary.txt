@@ -3,19 +3,19 @@ public:
     string addBinary(string a, string b) 
     {
         string res;
-        const size_t n=a.size()>b.size()?a.size():b.size(); //»ñÈ¡×î³¤µÄ×Ö·û´®³¤¶È
+        const size_t n=a.size()>b.size()?a.size():b.size(); //è·å–æœ€é•¿çš„å­—ç¬¦ä¸²é•¿åº¦
         reverse(a.begin(),a.end());
-        reverse(b.begin(),b.end());             //·´×ª±ãÓÚÔËËã
+        reverse(b.begin(),b.end());             //åè½¬ä¾¿äºè¿ç®—
         int car=0;
-        for(size_t i=0;i<n;i++){                //µÍÎ»´¦Àí
+        for(size_t i=0;i<n;i++){                //ä½ä½å¤„ç†
             const int ai=i<a.size()?a[i]-'0':0;
             const int bi=i<b.size()?b[i]-'0':0;
             const int val = (ai + bi + car)%2;
             car = (ai + bi +car) / 2;
-            res.insert(res.begin(),val+'0');    //Ã¿Ò»Î»¶¼·ûºÏÂß¼­´¦Àí
+            res.insert(res.begin(),val+'0');    //æ¯ä¸€ä½éƒ½ç¬¦åˆé€»è¾‘å¤„ç†
         }
-        if(car ==1)//×î¸ßÎ»µÄÎ¬»¤
+        if(car ==1)//æœ€é«˜ä½çš„ç»´æŠ¤
             res.insert(res.begin(),'1');
         return res;
     }
-};
+}
