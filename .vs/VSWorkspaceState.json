@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\leetcode_Longest_Substring_Without_Repeating_Characters",
-    "\\leetcode_两数相加"
+    ""
   ],
-  "SelectedNode": "\\leetcode_Longest_Substring_Without_Repeating_Characters\\source.cpp",
+  "SelectedNode": "\\leetcode_Longest_Palindromic_Substring",
   "PreviewInSolutionExplorer": false
 }
