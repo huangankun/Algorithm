@@ -36,6 +36,7 @@ public:
 				}
 			}
 		}
+		return ans;
 	}
 	bool isPalindromic(string s) {
 		int len = s.length();
@@ -49,3 +50,94 @@ public:
 		return true;
 	}
 };
+
+class solutionDesginProcess {
+public:
+	string longestPalindrome(string s) 
+	{
+		if (s == "")
+			return "";
+		string origin = s;
+		string reverse = s;
+		std::reverse(reverse.begin(), reverse.end());
+		int len = s.length();
+		int arr[len][len];
+		memset(arr, 0, sizeof(arr));
+		int maxLen = 0;
+		int maxEnd = 0;
+		for (int i = 0; i < len; i++)
+		{
+			for (int j = 0; j < len; j++)
+			{
+				if (origin[i] == reverse[j])
+				{
+					if (i == 0 || j == 0) {
+						arr[i][j] = 1;
+					}
+					else {
+						arr[i][j] = arr[i - 1][j - 1] + 1;
+					}
+				}
+				if (arr[i][j] > maxLen)
+				{
+					int beforeRev = len - 1 - j;
+					if (beforeRev + arr[i][j] - 1 == i)
+					{
+						maxLen = arr[i][j];
+						maxEnd = i;
+					}
+				}
+			}
+		}
+		return s.substr(maxEnd - maxLen + 1, maxLen);
+	}
+};
+
+//动态规划空间优化版本
+class solutionDesginProcessPro
+{
+public:
+	string longestPalindrome(string s) {
+		if (s == "")
+		{
+			return "";
+		}
+		string origin = s;
+		string reverse = s;
+		std::reverse(reverse.begin(), reverse.end());
+		int len = s.length();
+		int arr[len] = { 0 };
+		int maxLen = 0;
+		int maxEnd = 0;
+		for (int i = 0; i < len; i++)
+		{
+			for (int j = len -1; j >= 0; j--)
+			{
+				if (origin[i] == reverse[j])
+				{
+
+					if (i == 0 || j == 0)
+					{
+						arr[j] = 1;
+					}
+					else
+					{
+						arr[j] = arr[j - 1] + 1;
+					}
+				}
+				else
+					arr[j] = 0;
+				if (arr[j] > maxLen)
+				{
+					int breforeRev = len - 1 - j;
+					if (breforeRev + arr[j] - 1 == i)
+					{
+						maxLen = arr[j];
+						maxEnd = i;
+					}
+				}
+			}
+		}
+		return s.substr(maxEnd - maxLen + 1, maxLen);
+	}
+}
