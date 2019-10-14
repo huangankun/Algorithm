@@ -51,6 +51,7 @@ public:
 	}
 };
 
+//最长公共子串的求法
 class solutionDesginProcess {
 public:
 	string longestPalindrome(string s) 
@@ -141,3 +142,92 @@ public:
 		return s.substr(maxEnd - maxLen + 1, maxLen);
 	}
 }
+
+//暴力解法优化版本
+class solutionDesginProcessNext {
+public:
+	longestPalindrome(string s)
+	{
+		if (s == "")
+		{
+			return s;
+		}
+		int len = s.length();
+		bool p[len][len];
+		memset(p, 0, sizeof(p));
+		int maxLen = 0;
+		string maxPal = "";
+		for (int tmp = 1; tmp < len; ++tmp)
+		{
+			for (int start = 0; start < len; ++start)
+			{
+				int end = start + tmp - 1;
+				if (end > tmp)	//下标已经越界，结束本次循环
+				{
+					break;
+				}
+				p[start][end] = ((tmp == 1 || tmp == 2 || p[start + 1][end - 1]) && (s[start] == s[end]));
+				if (p[start][end] && tmp > maxLen)
+				{
+					maxPal = s.substr(start, end - start + 1);
+				}
+			}
+		}
+		return maxPal;
+	}
+
+	longestPalindromeNext(string s) {
+		if (s == "")
+		{
+			return s;
+		}
+		int len = s.length();
+		string res = "";
+		bool p[len];
+		for (int i = len; i >=0; i--)
+		{
+			for (int j = len-1; j>=i;j--)
+			{
+				p[j] = s[i] == s[j] && (j - i < 3 || p[j - 1]);
+				if (p[j] && j - i + 1 > res.length())
+				{
+					res = s.substr(i, j + 1 - i);
+				}
+			}
+		}
+		return res;
+	}
+
+	longestPalindromeCenter(string s) {
+		if (s == nullptr || s.length() < 1)
+		{
+			return "";
+		}
+		int start = 0, end = 0;
+		for (int i = 0; i < s.length(); ++i)
+		{
+			int len1 = expandAroundCenter(s, i, i);
+			int len2 = expandAroundCenter(s, i, i + 1);
+			int len = len1 > len2 ? len1 : len2;
+			if (len > end - start)
+			{
+				start = i - (len - 1) / 2;
+				end = i + len / 2;
+			}
+		}
+		return s.substr(start, end + 1 - start);
+	}
+
+	int expandAroundCenter(string s, int left, int right) {
+		int L = left, R = right;
+		while (L >= 0 && R < s.length() && s[L] == s[R])
+		{
+			L--;
+			R++;
+		}
+		return R - L - 1;
+	}
+};
+
+//扩展中心解法
+
