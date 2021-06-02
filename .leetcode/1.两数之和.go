@@ -33,6 +33,7 @@ func twoSum(nums []int, target int) []int {
 		if p, ok := m[target-x]; ok {
 			return []int{p, i}
 		}
+		//在遍历过程中直接构建哈希
 		m[x] = i
 	}
 	return nil
